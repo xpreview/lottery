@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lottery Spinner</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .spinner-section {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transition: 0.3s ease-in-out;
+    }
+
+    .spinner-section:hover {
+      transform: scale(1.02);
+    }
+
+    .spinner-section h2 {
+      margin-bottom: 10px;
+    }
+
+    .spin-btn {
+      background: #fff;
+      color: #333;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    .spin-btn:hover {
+      background: #ffd700;
+      color: #000;
+    }
+
+    .number-display {
+      font-size: 48px;
+      font-weight: bold;
+      margin: 15px 0;
+      animation: pop 0.3s ease-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .prize-info {
+      background: #00000055;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎯 Lottery Spinner Game</h1>
+  <h4>Entry Fee ₹10 Per Spinner Only</h4>
+
+  <!-- Spinner 1 -->
+  <div class="spinner-section">
+    <h2>Spinner 1 (1 to 5)</h2>
+    <div id="result1" class="number-display">🎲</div>
+    <button class="spin-btn" onclick="spin(1, 5, 'result1')">Spin</button>
+    <div class="prize-info">🎁 1st Prize: ₹30</div>
+  </div>
+
+  <!-- Spinner 2 -->
+  <div class="spinner-section">
+    <h2>Spinner 2 (1 to 10)</h2>
+    <div id="result2" class="number-display">🎲</div>
+    <button class="spin-btn" onclick="spin(1, 10, 'result2')">Spin</button>
+    <div class="prize-info">🎁 1st Prize: ₹60 | 2nd Prize: ₹10</div>
+  </div>
+
+  <!-- Spinner 3 -->
+  <div class="spinner-section">
+    <h2>Spinner 3 (1 to 50)</h2>
+    <div id="result3" class="number-display">🎲</div>
+    <button class="spin-btn" onclick="spin(1, 50, 'result3')">Spin</button>
+    <div class="prize-info">🎁 1st Prize: ₹250 | 2nd Prize: ₹50</div>
+  </div>
+
+  <!-- Spinner 4 -->
+  <div class="spinner-section">
+    <h2>Spinner 4 (1 to 100)</h2>
+    <div id="result4" class="number-display">🎲</div>
+    <button class="spin-btn" onclick="spin(1, 100, 'result4')">Spin</button>
+    <div class="prize-info">🎁 1st Prize: ₹500 | 2nd Prize: ₹100</div>
+  </div>
+
+  <script>
+    function spin(min, max, resultId) {
+      const element = document.getElementById(resultId);
+      element.textContent = "🔄";
+      let counter = 0;
+      const interval = setInterval(() => {
+        const rand = Math.floor(Math.random() * (max - min + 1)) + min;
+        element.textContent = rand;
+        counter++;
+        if (counter >= 20) {
+          clearInterval(interval);
+          // Final number
+          const final = Math.floor(Math.random() * (max - min + 1)) + min;
+          setTimeout(() => element.textContent = final, 100);
+        }
+      }, 50);
+    }
+  </script>
+
+</body>
+</html>
